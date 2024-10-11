@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: <%= ENV['DATABASE_NAME'] || "ceweb" %>
+  username: <%= ENV['DATABASE_USER'] || "postgres" %>
+  password: <%= ENV['DATABASE_PASSWORD'] || "postgres" %>
+  port: <%= ENV['DATABASE_PORT'] || "5432" %>
+  host: <%= ENV['DATABASE_HOST'] || "127.0.0.1" %>
+development:
+  <<: *default
+  port: 5434
+test:
+  <<: *default
+  database: ceweb_test
+  port: 5434
+production:
+  <<: *default
+  database: ceweb_production
+  username: ceweb
+  password: <%= ENV['DATABASE_PASSWORD'] %>
